@@ -7,9 +7,10 @@ public class EchoServer {
 
     public static void main(String[] args) throws IOException {
 
-        ServerSocket ss = new ServerSocket(6666);
+        ServerSocket ss = new ServerSocket(2000);
         while (true) {
             new EchoThread(ss.accept()).start();
         }
+  
     }
 }
