@@ -21,6 +21,11 @@ public class EchoThread extends Thread {
             PrintWriter out = new PrintWriter(new OutputStreamWriter(s.getOutputStream()), true);
             
             while (true) {
+                if(in.readLine().equals("Fine")){
+                    s.close();
+                    break;
+                    
+                }
                 out.println(in.readLine());
             }
         } catch (IOException ex) {
