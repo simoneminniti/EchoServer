@@ -7,26 +7,33 @@ import java.util.logging.Logger;
 
 public class EchoThread extends Thread {
 
-    private Socket s;
+    private Socket si;
 
-    public EchoThread(Socket s) {
+    public EchoThread(Socket si) {
 
-        this.s = s;
+        this.si = si;
     }
 
     public void run() {
         
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(s.getOutputStream()), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(si.getInputStream()));
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(si.getOutputStream()), true);
             
             while (true) {
-                if(in.readLine().equals("Fine")){
-                    s.close();
+                String s=in.readLine();
+                
+                
+                if(s.equals("Fine")){
+                   out.println("Connessione Chiusa");
+                   si.close();
+                   
                     break;
                     
-                }
-                out.println(in.readLine());
+                    
+                }else{
+                out.println(s);
+            }
             }
         } catch (IOException ex) {
             Logger.getLogger(EchoThread.class.getName()).log(Level.SEVERE, null, ex);
